@@ -17,7 +17,7 @@ class OnBoardingScreen extends StatelessWidget {
             child: Container(
               width: double.infinity,
               height: MediaQuery.of(context).size.height * 0.65,
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 color: AppColors.white,
                 borderRadius: BorderRadius.only(
                   topLeft: Radius.circular(30),
@@ -38,33 +38,34 @@ class OnBoardingScreen extends StatelessWidget {
                           child: Image.asset("assets/src/logo.jpg"),
                         ),
                         const SizedBox(height: 15),
-                        Text(
+                        const Text(
                           "Joyful mobility for a better life",
                           textAlign: TextAlign.center,
-                          style: AppFontStyle.headingLarge,
+                          style: AppStyle.headingLarge,
                         ),
                       ],
                     ),
                     Column(
                       children: [
-                        AppButton(
+                          AppButton(
                           buttonText: "Get started",
+                          onPress: (){
+                            Navigator.pushNamed(context, '/login');
+                          },
                         ),
                         const SizedBox(height: 22),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Text(
+                            const Text(
                               "Want to earn? ",
-                              style: AppFontStyle.smallText,
+                              style: AppStyle.smallText,
                             ),
                             GestureDetector(
-                              onTap: () {
-                                // TODO: Implement driver app download
-                              },
+                              onTap: () {},
                               child: Text(
                                 "Download driver app",
-                                style: AppFontStyle.smallText.copyWith(
+                                style: AppStyle.smallText.copyWith(
                                   color: AppColors.black,
                                   fontWeight: FontWeight.bold,
                                 ),
