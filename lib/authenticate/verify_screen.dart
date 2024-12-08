@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:pick_me_clone/utils/colors.dart';
+import 'package:pick_me_clone/utils/font_Style.dart';
 import 'package:pick_me_clone/widgets/loading_bottom_bar.dart';
 
 class VerifyScreen extends StatefulWidget {
@@ -33,52 +35,67 @@ class _VerifyScreenState extends State<VerifyScreen> {
     String code = _controllers.map((controller) => controller.text).join();
     if (code.length == 4) {
       print("OTP Code is :$code");
-      Navigator.pushNamed(context, '/main');
+
+      (context).pushNamed('home');
       PostBottomAppBar().showPostBottomAppBar(context);
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text("Verify number"),
-      ),
-      body: Column(
-        children: [
-          Padding(
-            padding: const EdgeInsets.all(15),
-            child: Container(
-              padding: const EdgeInsets.all(5),
-              width: double.infinity,
-              decoration: BoxDecoration(color: Colors.blue.withOpacity(0.15)),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text("We have sent a 4 digit code vis SMS to"),
-                  Text("94 2143954  Change number"),
-                ],
+    return SafeArea(
+      child: Scaffold(
+        appBar: AppBar(
+          title: const Text("Verify number"),
+        ),
+        body: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(15),
+              child: Container(
+                padding: const EdgeInsets.all(5),
+                width: double.infinity,
+                decoration: BoxDecoration(color: Colors.blue.withOpacity(0.15)),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text("We have sent a 4 digit code vis SMS to"),
+                    Text("94 2143954  Change number"),
+                  ],
+                ),
               ),
             ),
-          ),
 
-          // code enter section
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: List.generate(
-              4,
-              (index) => _inputBar(index),
+            // code enter section
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: List.generate(
+                4,
+                (index) => _inputBar(index),
+              ),
             ),
-          ),
-        ],
+            SizedBox(height: 20),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 15),
+              child: ElevatedButton(
+                onPressed: () {},
+                child: Text(
+                  "Resend code",
+                  style: AppStyle.smallText,
+                ),
+              ),
+            )
+          ],
+        ),
       ),
     );
   }
 
   Widget _inputBar(int index) {
     return SizedBox(
-      height: 55,
+      height: 50,
       width: 80,
       child: TextField(
         controller: _controllers[index],
